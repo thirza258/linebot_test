@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import TextMessageUser
-
+from tutorial_bot.views import handle_message
 
 # Create your views here.
 class TextMessageUserViews(APIView):
@@ -19,7 +19,7 @@ class TextMessageUserViews(APIView):
             user_id = request.data["user_id"]
             text_message = request.data["text_message"]
             text_message_user = TextMessageUser.objects.create(user_id=user_id, text_message=text_message)
-            
+            handle_message(message=text_message)
             return Response({"text_message_user": text_message_user}, status=status.HTTP_201_CREATED)
         except KeyError:
             return Response({"error": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
