@@ -1,1 +1,1 @@
-web: gunicorn 'tutorial_bot.wsgi'
+web: gunicorn 'linebot_project.wsgi'
