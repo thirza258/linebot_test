@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "tutorial_bot.apps.TutorialBotConfig",
+    "bot_views",
+    "djangorestframework",
 ]
 
 MIDDLEWARE = [
