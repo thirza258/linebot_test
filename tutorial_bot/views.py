@@ -11,6 +11,13 @@ from linebot.v3.messaging.models.push_message_response import PushMessageRespons
 from linebot.v3.messaging.rest import ApiException
 from pprint import pprint
 import os
+from linebot.v3.messaging import (
+    Configuration,
+    MessagingApi,
+    PushMessageRequest,
+    MulticastRequest,
+    BroadcastRequest,
+)
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
@@ -38,11 +45,41 @@ def callback(request):
 def handle_message(event):
     user_msg = event.message.text
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=user_msg)
-    )
+    if "reply" in user_msg:
+        response = user_msg
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=response)
+        )
+    elif "coba" in user_msg:
+        response = user_msg
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="Coba " + response)
+        )
+    elif "saya" in user_msg:
+        response = event.source.user_id
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="Anda " + response)
+        )
+    else:
+        response = "Maaf, saya tidak mengerti pesan Anda"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=response)
+        )
 
+# def push_message():
+#     try:
+#         line_bot_api.push_message(
+#             PushMessageRequest(
+#                 to=,
+#                 messages=[TextMessage(text="Hello, world!")]
+#             )
+#         )
+#     except LineBotApiError as e:
+#         print(e)
 
 # Defining the host is optional and defaults to https://api.line.me
 # See configuration.py for a list of all supported configuration parameters.
