@@ -70,16 +70,17 @@ def handle_message(event):
             TextSendMessage(text=response)
         )
 
-# def push_message():
-#     try:
-#         line_bot_api.push_message(
-#             PushMessageRequest(
-#                 to=,
-#                 messages=[TextMessage(text="Hello, world!")]
-#             )
-#         )
-#     except LineBotApiError as e:
-#         print(e)
+@csrf_exempt
+def push_message():
+    try:
+        line_bot_api.push_message(
+            PushMessageRequest(
+                to= "Ude96a2cc59965c6086cf4b280af2655d",
+                messages=[TextMessage(text="Hello, world!")]
+            )
+        )
+    except LineBotApiError as e:
+        print(e)
 
 # Defining the host is optional and defaults to https://api.line.me
 # See configuration.py for a list of all supported configuration parameters.

@@ -3,8 +3,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import TextMessageUser
-from tutorial_bot.views import handle_message
+from tutorial_bot.views import handle_message, push_message
 from .serializers import TextMessageUserSerializer
+
 
 
 # Create your views here.
@@ -22,6 +23,7 @@ class TextMessageUserViews(APIView):
             user_id = request.data["user_id"]
             text_message = request.data["text_message"]
             text_message_user = TextMessageUser.objects.create(user_id=user_id, text_message=text_message)
+            push_message()
             text_message_user.save()
             return Response({"text_message_user": "created"}, status=status.HTTP_201_CREATED)
         except KeyError:
