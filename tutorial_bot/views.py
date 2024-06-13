@@ -150,7 +150,7 @@ def push_message():
     try:
         line_bot_api.push_message(
             # PushMessageRequest(
-                to= "Ude96a2cc59965c6086cf4b280af2655d",
+                to= "Ce6606c634ff160397a13267e3d4458fa",
                 messages=[TextSendMessage(text="Hello, world!")]
             # )
         )
