@@ -122,10 +122,20 @@ def handle_message(event):
             TextSendMessage(text="Coba " + response)
         )
     elif "saya" in user_msg:
-        response = event.source.user_id
+        # response = event.source.user_id
+        # line_bot_api.reply_message(
+        #     event.reply_token,
+        #     TextSendMessage(text="Anda " + response)
+        # )
+        if event.source.type == "user":
+            response = f"Anda adalah {event.source.user_id}"
+        elif event.source.type == "group":
+            response = f"Group ID Anda adalah {event.source.group_id}"
+        elif event.source.type == "room":
+            response = f"Room ID Anda adalah {event.source.room_id}"
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="Anda " + response)
+            TextSendMessage(text=response)
         )
     else:
         response = "Maaf, saya tidak mengerti pesan Anda"
@@ -135,7 +145,7 @@ def handle_message(event):
         )
 
 # @csrf_exempt
-
+# @handler.default()
 def push_message():
     try:
         line_bot_api.push_message(
