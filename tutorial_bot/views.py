@@ -138,10 +138,10 @@ def handle_message(event):
 def push_message():
     try:
         line_bot_api.push_message(
-            PushMessageRequest(
+            # PushMessageRequest(
                 to= "Ude96a2cc59965c6086cf4b280af2655d",
                 messages=[TextMessage(text="Hello, world!")]
-            )
+            # )
         )
     except LineBotApiError as e:
         print(e)
