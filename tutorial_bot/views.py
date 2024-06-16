@@ -147,13 +147,21 @@ def handle_message(event):
 # @csrf_exempt
 # @handler.default()
 def push_message():
+    list_push = ["Ude96a2cc59965c6086cf4b280af2655d", "Ce6606c634ff160397a13267e3d4458fa"]
+
     try:
-        line_bot_api.push_message(
-            # PushMessageRequest(
-                to= "Ce6606c634ff160397a13267e3d4458fa",
+        for i in list_push:
+            line_bot_api.push_message(
+                to= i,
                 messages=[TextSendMessage(text="Hello, world!")]
-            # )
-        )
+            )
+        # line_bot_api.push_message(
+        #     # PushMessageRequest(
+        #         to= "Ce6606c634ff160397a13267e3d4458fa",
+        #         messages=[TextSendMessage(text="Hello, world!")]
+        #     # )
+        # )
+        
     except LineBotApiError as e:
         print(e)
 
